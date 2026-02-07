@@ -63,11 +63,14 @@ body.page-letter {
 }
 
 .letter-text {
-    font-size: 28px;
+    font-size: clamp(0.65rem, 4.5vw, 1.75rem);
     color: #8b0000;
     margin-bottom: 2rem;
     line-height: 1.8;
-    white-space: nowrap;
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
+    padding: 0 0.5rem;
 }
 
 .open-letter-btn {
@@ -676,10 +679,6 @@ body.page-success {
         font-size: 5rem;
     }
     
-    .letter-text {
-        font-size: 18px;
-    }
-    
     .open-letter-btn {
         font-size: 18px;
         padding: 1rem 1.5rem;
@@ -727,8 +726,38 @@ body.page-success {
 
 @media (max-width: 360px) {
     .letter-text {
-        font-size: 14px;
+        font-size: clamp(0.5rem, 4vw, 0.9rem);
     }
+}
+
+/* Success page: small circular celebrate (emoji only) button */
+.btn-celebrate-emoji {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0;
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    line-height: 1;
+    border-radius: 50%;
+    border: 3px solid #8b0000;
+    background: #ff69b4;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.1s;
+    box-shadow: 3px 3px 0 #8b0000;
+}
+.btn-celebrate-emoji:hover {
+    transform: scale(1.08);
+    box-shadow: 2px 2px 0 #8b0000;
+}
+.btn-celebrate-emoji:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 #8b0000;
 }
 
 /* Touch-friendly and mobile */

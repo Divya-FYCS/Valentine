@@ -32,7 +32,7 @@
                 <h1 class="success-title">yayaya I knew you would say yes my baby<span class="success-heart" aria-hidden="true">💕</span></h1>
             </div>
             <p class="success-valentine-text">Happy Valentine Day Love ❤️</p>
-            <button onclick="createConfetti()" class="btn btn-yes" style="margin-top: 1.5rem;">Celebrate! 🎉</button>
+            <button type="button" onclick="createConfetti()" class="btn-celebrate-emoji" title="Celebrate" aria-label="Celebrate">🎉</button>
         </div>
     </div>
     
@@ -58,6 +58,41 @@
         window.addEventListener('load', function() {
             setTimeout(createConfetti, 500);
         });
+
+        // Even scatter: reposition all kisses and "I love you" so there are no big gaps
+        (function() {
+            var kisses = document.querySelectorAll('.success-kisses-bg .kiss');
+            var loves = document.querySelectorAll('.success-love-bg span');
+            if (!kisses.length || !loves.length) return;
+
+            function evenGridPositions(count, cols, jitter) {
+                jitter = jitter || 5;
+                var rows = Math.ceil(count / cols);
+                var positions = [];
+                for (var i = 0; i < count; i++) {
+                    var c = i % cols;
+                    var r = Math.floor(i / cols);
+                    var baseLeft = (cols > 1) ? (c / (cols - 1)) * 88 + 6 : 50;
+                    var baseTop = (rows > 1) ? (r / (rows - 1)) * 88 + 6 : 50;
+                    var left = baseLeft + (Math.random() * 2 - 1) * jitter;
+                    var top = baseTop + (Math.random() * 2 - 1) * jitter;
+                    positions.push({ left: Math.max(2, Math.min(96, left)), top: Math.max(2, Math.min(96, top)) });
+                }
+                return positions;
+            }
+
+            var kissPositions = evenGridPositions(kisses.length, 8, 6);
+            kissPositions.forEach(function(pos, i) {
+                kisses[i].style.left = pos.left + '%';
+                kisses[i].style.top = pos.top + '%';
+            });
+
+            var lovePositions = evenGridPositions(loves.length, 6, 5);
+            lovePositions.forEach(function(pos, i) {
+                loves[i].style.left = pos.left + '%';
+                loves[i].style.top = pos.top + '%';
+            });
+        })();
     </script>
     <style>
         @keyframes fall {
