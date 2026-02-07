@@ -59,24 +59,30 @@
             setTimeout(createConfetti, 500);
         });
 
-        // Even scatter: reposition all kisses and "I love you" so there are no big gaps
-        (function() {
+        // Even scatter: reposition all kisses and "I love you" so there are no big gaps; mobile-safe margins
+        function applyScatter() {
             var kisses = document.querySelectorAll('.success-kisses-bg .kiss');
             var loves = document.querySelectorAll('.success-love-bg span');
             if (!kisses.length || !loves.length) return;
 
+            var isMobile = window.innerWidth <= 768;
+            // On mobile use wider margins so text/emojis don't get cut off at edges
+            var minL = isMobile ? 18 : 6, maxL = isMobile ? 82 : 94;
+            var minT = isMobile ? 14 : 6, maxT = isMobile ? 86 : 94;
+
             function evenGridPositions(count, cols, jitter) {
-                jitter = jitter || 5;
+                jitter = jitter || (isMobile ? 3 : 5);
                 var rows = Math.ceil(count / cols);
+                var rangeL = maxL - minL, rangeT = maxT - minT;
                 var positions = [];
                 for (var i = 0; i < count; i++) {
                     var c = i % cols;
                     var r = Math.floor(i / cols);
-                    var baseLeft = (cols > 1) ? (c / (cols - 1)) * 88 + 6 : 50;
-                    var baseTop = (rows > 1) ? (r / (rows - 1)) * 88 + 6 : 50;
+                    var baseLeft = (cols > 1) ? minL + (c / (cols - 1)) * rangeL : (minL + maxL) / 2;
+                    var baseTop = (rows > 1) ? minT + (r / (rows - 1)) * rangeT : (minT + maxT) / 2;
                     var left = baseLeft + (Math.random() * 2 - 1) * jitter;
                     var top = baseTop + (Math.random() * 2 - 1) * jitter;
-                    positions.push({ left: Math.max(2, Math.min(96, left)), top: Math.max(2, Math.min(96, top)) });
+                    positions.push({ left: Math.max(minL, Math.min(maxL, left)), top: Math.max(minT, Math.min(maxT, top)) });
                 }
                 return positions;
             }
@@ -92,7 +98,9 @@
                 loves[i].style.left = pos.left + '%';
                 loves[i].style.top = pos.top + '%';
             });
-        })();
+        }
+        window.addEventListener('load', applyScatter);
+        applyScatter(); // run once in case load already fired
     </script>
     <style>
         @keyframes fall {
