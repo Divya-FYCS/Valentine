@@ -59,19 +59,25 @@
             setTimeout(createConfetti, 500);
         });
 
-        // Even scatter: reposition all kisses and "I love you" so there are no big gaps; mobile-safe margins
+        // Even scatter: reposition kisses and "I love you"; on mobile reduce overlap (fewer elements, sparser grid, offset layers)
         function applyScatter() {
             var kisses = document.querySelectorAll('.success-kisses-bg .kiss');
             var loves = document.querySelectorAll('.success-love-bg span');
             if (!kisses.length || !loves.length) return;
 
             var isMobile = window.innerWidth <= 768;
-            // On mobile use wider margins so text/emojis don't get cut off at edges
             var minL = isMobile ? 18 : 6, maxL = isMobile ? 82 : 94;
             var minT = isMobile ? 14 : 6, maxT = isMobile ? 86 : 94;
 
-            function evenGridPositions(count, cols, jitter) {
-                jitter = jitter || (isMobile ? 3 : 5);
+            var kissCols = isMobile ? 5 : 8;
+            var loveCols = isMobile ? 4 : 6;
+            var jitter = isMobile ? 2 : 5;
+            var loveOffsetL = isMobile ? 10 : 0;
+            var loveOffsetT = isMobile ? 8 : 0;
+
+            function evenGridPositions(count, cols, jitterVal, offsetL, offsetT) {
+                offsetL = offsetL || 0;
+                offsetT = offsetT || 0;
                 var rows = Math.ceil(count / cols);
                 var rangeL = maxL - minL, rangeT = maxT - minT;
                 var positions = [];
@@ -80,24 +86,48 @@
                     var r = Math.floor(i / cols);
                     var baseLeft = (cols > 1) ? minL + (c / (cols - 1)) * rangeL : (minL + maxL) / 2;
                     var baseTop = (rows > 1) ? minT + (r / (rows - 1)) * rangeT : (minT + maxT) / 2;
-                    var left = baseLeft + (Math.random() * 2 - 1) * jitter;
-                    var top = baseTop + (Math.random() * 2 - 1) * jitter;
+                    var left = baseLeft + (Math.random() * 2 - 1) * jitterVal + offsetL;
+                    var top = baseTop + (Math.random() * 2 - 1) * jitterVal + offsetT;
                     positions.push({ left: Math.max(minL, Math.min(maxL, left)), top: Math.max(minT, Math.min(maxT, top)) });
                 }
                 return positions;
             }
 
-            var kissPositions = evenGridPositions(kisses.length, 8, 6);
-            kissPositions.forEach(function(pos, i) {
-                kisses[i].style.left = pos.left + '%';
-                kisses[i].style.top = pos.top + '%';
-            });
-
-            var lovePositions = evenGridPositions(loves.length, 6, 5);
-            lovePositions.forEach(function(pos, i) {
-                loves[i].style.left = pos.left + '%';
-                loves[i].style.top = pos.top + '%';
-            });
+            if (isMobile) {
+                var kissCount = Math.ceil(kisses.length / 2);
+                var loveCount = Math.ceil(loves.length / 2);
+                var kissPositions = evenGridPositions(kissCount, kissCols, jitter, 0, 0);
+                var lovePositions = evenGridPositions(loveCount, loveCols, jitter, loveOffsetL, loveOffsetT);
+                for (var k = 0; k < kisses.length; k++) {
+                    kisses[k].style.display = (k % 2 === 0) ? '' : 'none';
+                    if (k % 2 === 0 && k / 2 < kissPositions.length) {
+                        var pos = kissPositions[k / 2];
+                        kisses[k].style.left = pos.left + '%';
+                        kisses[k].style.top = pos.top + '%';
+                    }
+                }
+                for (var L = 0; L < loves.length; L++) {
+                    loves[L].style.display = (L % 2 === 0) ? '' : 'none';
+                    if (L % 2 === 0 && L / 2 < lovePositions.length) {
+                        var pos = lovePositions[L / 2];
+                        loves[L].style.left = pos.left + '%';
+                        loves[L].style.top = pos.top + '%';
+                    }
+                }
+            } else {
+                var kissPositions = evenGridPositions(kisses.length, kissCols, jitter, 0, 0);
+                var lovePositions = evenGridPositions(loves.length, loveCols, jitter, loveOffsetL, loveOffsetT);
+                kissPositions.forEach(function(pos, i) {
+                    kisses[i].style.display = '';
+                    kisses[i].style.left = pos.left + '%';
+                    kisses[i].style.top = pos.top + '%';
+                });
+                lovePositions.forEach(function(pos, i) {
+                    loves[i].style.display = '';
+                    loves[i].style.left = pos.left + '%';
+                    loves[i].style.top = pos.top + '%';
+                });
+            }
         }
         window.addEventListener('load', applyScatter);
         applyScatter(); // run once in case load already fired
