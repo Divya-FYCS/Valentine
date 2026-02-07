@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <meta name="theme-color" content="#4a90d9">
+    <meta name="description" content="Yay! You said yes!">
+    <title>Yay! 💕</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-success">
+    <div class="success-kisses-bg" aria-hidden="true">
+        <span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span>
+        <span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span>
+        <span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span>
+        <span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span><span class="kiss">😘</span><span class="kiss">💋</span>
+    </div>
+    <div class="success-love-bg" aria-hidden="true">
+        <span>I love you Shona</span><span>I love you baby</span><span>I love you cutiepie</span><span>I love you raja</span><span>I love you motu</span><span>I love you bebo</span>
+        <span>I love you Shona</span><span>I love you baby</span><span>I love you cutiepie</span><span>I love you raja</span><span>I love you motu</span><span>I love you bebo</span>
+        <span>I love you Shona</span><span>I love you baby</span><span>I love you cutiepie</span><span>I love you raja</span><span>I love you motu</span><span>I love you bebo</span>
+        <span>I love you Shona</span><span>I love you baby</span><span>I love you cutiepie</span><span>I love you raja</span><span>I love you motu</span><span>I love you bebo</span>
+    </div>
+    <div class="success-container">
+        <div class="success-content">
+            <div class="success-photo-wrap">
+                <img src="success-photo.png" alt="Us" class="teddy-gif couple-photo success-photo-img">
+                <h1 class="success-title">yayaya I knew you would say yes my baby<span class="success-heart" aria-hidden="true">💕</span></h1>
+            </div>
+            <p class="success-valentine-text">Happy Valentine Day Love ❤️</p>
+            <button onclick="createConfetti()" class="btn btn-yes" style="margin-top: 1.5rem;">Celebrate! 🎉</button>
+        </div>
+    </div>
+    
+    <script>
+        function createConfetti() {
+            var colors = ['💕', '💖', '✨', '🎉'];
+            for (var i = 0; i < 20; i++) {
+                var confetti = document.createElement('div');
+                confetti.textContent = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.fontSize = Math.random() * 1 + 1.5 + 'rem';
+                confetti.style.zIndex = '300';
+                confetti.style.animation = 'fall ' + (Math.random() * 3 + 2) + 's linear forwards';
+                confetti.style.pointerEvents = 'none';
+                document.body.appendChild(confetti);
+                setTimeout(function(el) { return function() { el.remove(); }; }(confetti), 3000);
+            }
+        }
+        
+        // Trigger confetti on page load
+        window.addEventListener('load', function() {
+            setTimeout(createConfetti, 500);
+        });
+    </script>
+    <style>
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <meta name="theme-color" content="#2d1b4e">
+    <meta name="description" content="Please say yes!">
+    <title>No na... 💔</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💔</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-crying">
+    <div class="crying-hearts-bg" aria-hidden="true"></div>
+    <div class="crying-container">
+        <div class="crying-content">
+            <div class="crying-emoji" aria-hidden="true">😢💔</div>
+            <h1 class="crying-title">No na...</h1>
+            <p class="crying-text">Please one try ?</p>
+            <a href="proposal.html" class="btn btn-yes crying-back">Try again?</a>
+        </div>
+    </div>
+    <script>
+        (function () {
+            var bg = document.querySelector('.crying-hearts-bg');
+            if (!bg) return;
+            for (var i = 0; i < 200; i++) {
+                var span = document.createElement('span');
+                span.className = 'crying-heart-emoji';
+                span.textContent = '\uD83D\uDC94';
+                bg.appendChild(span);
+            }
+        })();
+        
+        // Animate crying emoji
+        window.addEventListener('load', function() {
+            var emoji = document.querySelector('.crying-emoji');
+            if (emoji) {
+                emoji.style.animation = 'cry 1s ease-in-out infinite';
+            }
+        });
+    </script>
+    <style>
+        @keyframes cry {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(10px) scale(1.05);
+            }
+        }
+    </style>
+</body>
+</html>

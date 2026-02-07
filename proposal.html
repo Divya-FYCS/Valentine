@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes, maximum-scale=5">
+    <meta name="theme-color" content="#5a3d5a">
+    <meta name="description" content="Will you be my Valentine?">
+    <title>Will You Be My Valentine? 💕</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-proposal">
+    <div class="collage-background" aria-hidden="true">
+        <img src="collage1.png" alt="" class="collage-photo c1">
+        <img src="collage2.png" alt="" class="collage-photo c2">
+        <img src="collage3.png" alt="" class="collage-photo c3">
+        <img src="collage4.png" alt="" class="collage-photo c4">
+        <img src="collage5.png" alt="" class="collage-photo c5">
+        <img src="collage6.png" alt="" class="collage-photo c6">
+        <img src="collage7.png" alt="" class="collage-photo c7">
+        <img src="collage8.png" alt="" class="collage-photo c8">
+        <img src="collage9.png" alt="" class="collage-photo c9">
+        <img src="collage10.png" alt="" class="collage-photo c10">
+        <img src="collage11.png" alt="" class="collage-photo c11">
+        <img src="collage12.png" alt="" class="collage-photo c12">
+    </div>
+    <div class="container">
+        <h1 class="proposal-title">will you be my valentine?</h1>
+        <div class="buttons-frame" id="buttonsFrame">
+            <button type="button" id="yesBtn" class="btn btn-yes">Yes! 💕</button>
+            <button type="button" id="noBtn" class="btn btn-no">No</button>
+        </div>
+    </div>
+    <!-- Are you Sure? confirmation overlay -->
+    <div class="confirm-overlay" id="confirmOverlay" aria-hidden="true">
+        <div class="confirm-box">
+            <h2 class="confirm-title">Are you Sure? <span class="confirm-shock" aria-hidden="true">😱</span></h2>
+            <div class="confirm-buttons">
+                <button type="button" id="confirmYesBtn" class="btn btn-yes">Yes</button>
+                <button type="button" id="confirmNoBtn" class="btn btn-no-static">No</button>
+            </div>
+        </div>
+    </div>
+    <script src="proposal.js"></script>
+</body>
+</html>

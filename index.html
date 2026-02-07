@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <meta name="theme-color" content="#ff9a9e">
+    <meta name="description" content="A letter for you - open to reveal something special">
+    <title>Letter for You 💕</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-letter">
+    <div class="container">
+        <img src="couple.png" alt="Us" class="letter-gif couple-photo">
+        <p class="letter-text">letter for you Yaggu baby ♥️</p>
+        <button class="open-letter-btn" onclick="openLetterWithAnimation()">Open Letter</button>
+    </div>
+    
+    <script>
+        function openLetterWithAnimation() {
+            var btn = document.querySelector('.open-letter-btn');
+            btn.style.transform = 'scale(0.9)';
+            setTimeout(function() {
+                btn.style.transform = 'scale(1)';
+                window.location.href = 'proposal.html';
+            }, 150);
+        }
+        
+        // Add animated background elements on mobile
+        window.addEventListener('load', function() {
+            var container = document.querySelector('.page-letter .container');
+            if (container && window.innerWidth < 768) {
+                for (var i = 0; i < 5; i++) {
+                    var heart = document.createElement('div');
+                    heart.textContent = '💕';
+                    heart.style.position = 'fixed';
+                    heart.style.fontSize = Math.random() * 1 + 1 + 'rem';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = Math.random() * 100 + '%';
+                    heart.style.opacity = '0.1';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.zIndex = '-1';
+                    heart.style.animation = 'pulse 2s ease-in-out infinite';
+                    heart.style.animationDelay = (i * 0.2) + 's';
+                    document.body.appendChild(heart);
+                }
+            }
+        });
+    </script>
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</body>
+</html>
