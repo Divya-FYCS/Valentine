@@ -650,9 +650,10 @@ body.page-success {
         padding: 1.5rem;
     }
 
-    /* Success page: keep scattered text and kisses inside viewport on mobile */
+    /* Success page: straight-line grid on mobile, no rotation */
     .success-love-bg span {
         font-size: clamp(0.4rem, 2.2vw, 0.6rem);
+        transform: translate(-50%, -50%); /* straight text, no rotate */
     }
     .success-kisses-bg .kiss {
         font-size: clamp(0.85rem, 4vw, 1.4rem);
