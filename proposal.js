@@ -69,14 +69,42 @@
         }
     }
 
-    // No button can move anywhere on the page (fixed positioning)
+    // No button: fixed so it can run away; initial position next to Yes for proper alignment
     noBtn.style.position = 'fixed';
-    noBtn.style.left = '50%';
-    noBtn.style.top = '50%';
-    noBtn.style.transform = 'translate(-50%, -50%)';
     noBtn.style.transition = 'left 0.5s ease-out, top 0.5s ease-out';
     noBtn.style.pointerEvents = 'auto';
     noBtn.style.zIndex = 10;
+
+    function positionNoNextToYes() {
+        var yesRect = yesBtn.getBoundingClientRect();
+        var noRect = noBtn.getBoundingClientRect();
+        var gap = 12;
+        // No below Yes, same horizontal center (stacked for mobile)
+        var left = yesRect.left + (yesRect.width / 2) - (noRect.width / 2);
+        var top = yesRect.bottom + gap;
+        var margin = 12;
+        left = Math.max(margin, Math.min(window.innerWidth - noRect.width - margin, left));
+        top = Math.max(margin, Math.min(window.innerHeight - noRect.height - margin, top));
+        noBtn.style.transform = 'none';
+        noBtn.style.left = left + 'px';
+        noBtn.style.top = top + 'px';
+    }
+
+    if (frame && yesBtn) {
+        function initNoPosition() {
+            positionNoNextToYes();
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(initNoPosition, 0);
+        } else {
+            window.addEventListener('load', initNoPosition);
+        }
+        window.addEventListener('resize', positionNoNextToYes);
+    } else {
+        noBtn.style.left = '50%';
+        noBtn.style.top = '50%';
+        noBtn.style.transform = 'translate(-50%, -50%)';
+    }
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('touchmove', onTouchMove, { passive: false });
